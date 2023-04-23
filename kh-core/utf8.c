@@ -35,6 +35,16 @@ kh_u8 kh_utf8_hexchar_to_nibble(const kh_utf8 c) {
   return -1;
 }
 
+kh_bool kh_utf8_strcmp(const kh_utf8 * a, const kh_utf8 * b) {
+  while (*a == *b) {
+    if (!*a)
+      return 1;
+    ++a;
+    ++b;
+  }
+  return 0;
+}
+
 kh_bool kh_utf8_is_alpha(const kh_utf8 c) {
   return c >= 'A' && c <= 'Z' ||
          c >= 'a' && c <= 'z';

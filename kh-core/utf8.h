@@ -17,6 +17,8 @@ kh_sz kh_utf8_char_len(const kh_utf8 c);
  */
 kh_u8 kh_utf8_hexchar_to_nibble(const kh_utf8 c);
 
+kh_bool kh_utf8_strcmp(const kh_utf8 * a, const kh_utf8 * b);
+
 kh_bool kh_utf8_is_alpha(const kh_utf8 c);
 kh_bool kh_utf8_is_num(const kh_utf8 c);
 kh_bool kh_utf8_is_hex(const kh_utf8 c);
