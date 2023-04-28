@@ -21,3 +21,5 @@ typedef kh_u8  kh_bool;
 
 
 typedef kh_i8 kh_utf8;
+
+#define KH_U8_INVALID 0xFF

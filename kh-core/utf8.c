@@ -19,20 +19,27 @@ kh_sz kh_utf8_char_len(const kh_utf8 c) {
   }
 
   if (!sz)
-    return -1;
+    return KH_U8_INVALID;
   return sz + 1;
 }
 
-kh_u8 kh_utf8_hexchar_to_nibble(const kh_utf8 c) {
-  if (c >= '0' && c <= '9') {
+kh_u8 kh_utf8_char_to_num(const kh_utf8 c) {
+  if (c >= '0' && c <= '9')
     return c - '0';
-  } else if (c >= 'A' && c <= 'F') {
+  return KH_U8_INVALID;
+}
+
+kh_u8 kh_utf8_hexchar_to_nibble(const kh_utf8 c) {
+  kh_u8 v = kh_utf8_char_to_num(c);
+  if (v != KH_U8_INVALID)
+    return v;
+  if (c >= 'A' && c <= 'F') {
     return c - 'A' + 0xA;
   } else if (c >= 'a' && c <= 'f') {
     return c - 'a' + 0xa;
   }
 
-  return -1;
+  return KH_U8_INVALID;
 }
 
 kh_bool kh_utf8_strcmp(const kh_utf8 * a, const kh_utf8 * b) {
