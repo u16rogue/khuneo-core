@@ -1,4 +1,4 @@
-#include "utf8.h"
+#include <kh-core/utf8.h>
 
 kh_sz kh_utf8_char_len(const kh_utf8 c) {
   kh_u8 mask = *(kh_u8 *)&c & 0xF0;

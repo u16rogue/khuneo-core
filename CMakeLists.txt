@@ -5,11 +5,11 @@ project(kh_core)
 add_library(
   ${PROJECT_NAME}
   STATIC
-  "kh-core/types.h"
-  "kh-core/types.c"
+  "include/kh-core/types.h"
+  "src/types.c"
 
-  "kh-core/utf8.h"
-  "kh-core/utf8.c"
+  "include/kh-core/utf8.h"
+  "src/utf8.c"
 )
 
 set_target_properties(
@@ -21,5 +21,5 @@ set_target_properties(
 target_include_directories(
   ${PROJECT_NAME}
   PUBLIC
-  "${CMAKE_CURRENT_SOURCE_DIR}"
+  "include/"
 )
