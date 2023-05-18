@@ -52,6 +52,67 @@ kh_bool kh_utf8_strcmp(const kh_utf8 * a, const kh_utf8 * b) {
   return 0;
 }
 
+kh_bool kh_utf8_strcpy(kh_utf8 * dst, const kh_utf8 * src) {
+  while (*src) {
+    *dst = *src;
+    ++dst;
+    ++src;
+  }
+  *dst = '\0';
+  return 1;
+}
+
+#if 0
+kh_bool kh_utf8_u32_str(const kh_u32 n, kh_utf8 * out, kh_sz sz) {
+  if (sz < 2)
+    return 0;
+
+  if (n == 0) {
+    out[0] = '0';
+    out[1] = '\0';
+    return 1;
+  }
+
+  kh_utf8 tmp[11]; // 2^10 + null term
+  kh_u32 mod = 10;
+  kh_u32 div = 0;
+  kh_u32 res = 0;
+
+  kh_u32 i = 0;
+
+  while (div < n) {
+    if (div == 0) {
+      res = n % mod;
+      mod = 100;
+      div = 10;
+    } else {
+      res = n % mod / div;
+      mod *= 10;
+      div *= 10;
+    }
+
+    tmp[i] = '0' + res;
+
+    ++i;
+    --sz;
+
+    if (sz < 1 || i > 10) // shouldnt exceed 10 since that's way off the maximum u32
+      return 0;
+  }
+
+  --i;
+  for (;;) {
+    *out = tmp[i];
+    if (i == 0)
+      break;
+    --i;
+    ++out;
+  }
+
+  return 1;
+}
+#endif
+
 kh_bool kh_utf8_is_alpha(const kh_utf8 c) {
   return c >= 'A' && c <= 'Z' ||
          c >= 'a' && c <= 'z';
